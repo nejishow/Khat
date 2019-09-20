@@ -1,0 +1,118 @@
+<Page class="page" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
+    <ActionBar class="action-bar">
+        <!-- 
+                    Use the NavigationButton as a side-drawer button in Android
+                    because ActionItems are shown on the right side of the ActionBar
+                    -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()">
+        </NavigationButton>
+        <!-- 
+                    Use the ActionItem for IOS with position set to left. Using the
+                    NavigationButton as a side-drawer button in iOS is not possible,
+                    because its function is to always navigate back in the application.
+                    -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Experiment"></Label>
+    </ActionBar>
+    <ScrollView>
+
+        <GridLayout rows="auto, auto, auto, auto" columns="*">
+
+            <!-- Summary -->
+            <!-- Navigaton -->
+            <ios>
+                <GridLayout row="0" rows="auto" columns="*,75,*,75" class="action-bar p-20">
+                    <Image src="res://menu" (tap)="onDrawerButtonTap()" row="0" col="0" stretch="aspectFit" width="35"
+                        horizontalAlignment="left" class="action-item p-5"> </Image>
+
+                    <Image src="res://dol" class="action-item p-5" row="0" col="1" stretch="aspectFit" width="35"
+                        horizontalAlignment="center" opacity="0.2"></Image>
+                    <Image src="res://cal" class="action-item p-5" row="0" col="2" (tap)="goToCalendarPage()"
+                        stretch="aspectFit" width="35" horizontalAlignment="center" opacity="0.2"></Image>
+
+                </GridLayout>
+            </ios>
+            <android>
+                <GridLayout row="0" rows="auto" columns="*,75,*,75" class="action-bar p-20">
+                    <Image src="res://menu" (tap)="onDrawerButtonTap()" row="0" col="0" stretch="aspectFit" width="35"
+                        horizontalAlignment="left" class="action-item p-5"> </Image>
+
+                    <Image src="res://dol" class="action-item p-5" row="0" col="1" stretch="aspectFit" width="35"
+                        horizontalAlignment="center"></Image>
+                    <Image src="res://cal" class="action-item p-5" row="0" col="2" (tap)="goToCalendarPage()"
+                        stretch="aspectFit" width="35" horizontalAlignment="center" opacity="0.5"></Image>
+
+                </GridLayout>
+            </android>
+            <!-- /Navigation -->
+
+            <GridLayout row="1" columns="*, *" rows="auto, auto">
+                <!-- Date Today -->
+                <Label [text]="day" row="0" col="0" class="large" fontSize="35" color="#374064"></Label>
+                <Label [text]="month + ' ' + date + ', ' + year" row="1" col="0" class="body small"
+                    color="#374064"></Label>
+                <!-- Spending this month -->
+
+            </GridLayout>
+            <!-- /Summary -->
+
+            <!-- Tip -->
+
+            <!-- /Tip -->
+
+            <!-- Transactions -->
+            <StackLayout row="2" [visibility]="consumption.length > 0 ? 'visible' : 'collapsed'" orientation="vertical"
+                class="m-t-30" backgroundColor="#2C3251">
+
+                <ListView #listView style="height:1000px" [items]="consumption" backgroundColor="#2C3251"
+                    separatorColor="transparent">
+                    <ng-template let-item="item">
+                        <CardView elevation="40" radius="10" ios:shadowRadius="3" margin="10">
+
+                            <GridLayout columns="*, *" rows="auto, auto, auto" class="p-l-20" backgroundColor="#FFFFFF"
+                                (tap)="onRadItemTap(item.name)">
+                                <Label textWrap="true" [text]="item.name" row="0" col="0" class="h1"></Label>
+
+                                <Label textWrap="true" [text]="item.price + ' fdj'" row="0" col="1" class="h2 p-r-20"
+                                    color="#89D5E2" [visibility]="!edit ? 'visible' : 'collapsed'"></Label>
+                                <TextField [visibility]="edit ? 'visible' : 'collapsed'" row="0" col="1" hint="prix"
+                                    secure="false" [(ngModel)]="item.price" keyboardType="number" returnKeyType="done"
+                                    maxLength="5" class="input input-border" (textChange)="price($event,item)">
+                                </TextField>
+
+                            </GridLayout>
+                        </CardView>
+                    </ng-template>
+                </ListView>
+            </StackLayout>
+            <CardView elevation="40" radius="10" ios:shadowRadius="3" row="2"
+                [visibility]="consumption.length === 0 ? 'visible' : 'collapsed'">
+                <GridLayout class="card" rows="auto" style="height:500px" columns="*" orientation="vertical"
+                    class="m-t-30" backgroundColor="white">
+                    <label textWrap="true"
+                        text="Pas de consommation enregistrée aujourd'hui. Voulez vous enregistrer une consommation?"></label>
+
+                </GridLayout>
+            </CardView>
+            <GridLayout class="card" row="3" rows="auto" columns="*,*" class="m-t-30" backgroundColor="#2C3251"
+                [visibility]="consumption.length > 0 ? 'visible' : 'collapse'">
+                <button [visibility]="!edit ? 'visible' : 'collapsed'" col=0 text="Supprimer" (tap)="delete()"></button>
+                <button [visibility]="!edit ? 'visible' : 'collapsed'" col=1 text="Modifier"
+                    (tap)=toggleEdit()></button>
+                <button [visibility]="edit ? 'visible' : 'collapsed'" col=0 text="Confirmer"
+                    (tap)="updateConsumption()"></button> <button [visibility]="edit ? 'visible' : 'collapsed'" col=1
+                    text="Annuler" (tap)=toggleEdit()></button>
+            </GridLayout>
+            <GridLayout class="card" row=3 rows="auto" orientation="vertical" class="m-t-30" backgroundColor="#2C3251"
+                [visibility]="consumption.length === 0 ? 'visible' : 'collapsed'">
+                <button  row=0 text="Oui, enregistrer une consommation" (tap)=createConsumption()></button>
+            </GridLayout>
+
+
+            <!-- /Transactions -->
+        </GridLayout>
+    </ScrollView>
+
+</Page>

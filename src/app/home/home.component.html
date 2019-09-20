@@ -1,0 +1,40 @@
+<Page class="page" loaded="loaded" unloaded="unloaded" navigatedTo="onNavigatedTo"
+    xmlns="http://schemas.nativescript.org/tns.xsd" actionBarHidden="true">
+
+    <ActionBar class="action-bar">
+        <!-- 
+                        Use the NavigationButton as a side-drawer button in Android
+                        because ActionItems are shown on the right side of the ActionBar
+                        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()">
+        </NavigationButton>
+        <!-- 
+                        Use the ActionItem for IOS with position set to left. Using the
+                        NavigationButton as a side-drawer button in iOS is not possible,
+                        because its function is to always navigate back in the application.
+                        -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left" stretch="aspectFit" width="35">
+        </ActionItem>
+        <Label class="action-bar-title" text="Experiment"></Label>
+    </ActionBar>
+    <ScrollView>
+        <GridLayout tkMainContent class="page page-content" rows="*" columns="*">
+            <GridLayout rows="*,*,*" columns="*" row="0" style="padding-top:35">
+                <Label row="0" text="Khat" class="center city-name"></Label>
+                <Image row="1" src="res://leave" class="leave"></Image>
+                <i class="fab fa-500px"></i>
+
+
+                <GridLayout row="2" columns="*, *" rows="90, 50" class="center" style="margin-top:50">
+                    <Image [nsRouterLink]="['/menu']" src="res://info" row="0" col="0" class="leave"></Image>
+                    <Image (tap)="goToMoney()" row="0" col="1" src="res://money" class="leave"></Image>
+
+                    <Label text="Khat" row="1" col="0" class="icon-text icon-text-left"></Label>
+                    <Label text="Argent" row="1" col="1" class="icon-text icon-text-middle"></Label>
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+    </ScrollView>
+
+</Page>

@@ -1,0 +1,61 @@
+<!--
+RadSideDrawer is a UI component part of the Progress NativeScript UI set of components.
+Learn more about the RadSideDrawer UI component and how it can be customized in this documentation article:
+http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawer/getting-started
+-->
+<RadSideDrawer [drawerTransition]="sideDrawerTransition">
+    <GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
+        <StackLayout row="0" class="theHeader"  [visibility]="userConnected ? 'visible' : 'collapsed'">
+            <Label text="Connecté en tant que:"></Label>
+            <Label [text]="user?.email"></Label>
+        </StackLayout>
+        <StackLayout row="0" class="theHeader" [visibility]="!userConnected ? 'visible' : 'collapsed'">
+            <Label text="KHAT"></Label>
+            <Label text="version 1.1"></Label>
+            <Label text="Utilisateur non connecté"></Label>
+        </StackLayout>
+
+        <ScrollView row="1">
+            <GridLayout class="sidedrawer-content" rows="*,*,*,*,*,*">
+                <GridLayout row="0" columns="auto, *" class="sidedrawer-list-item"
+                    [class.selected]="isComponentSelected('/home')" (tap)="onNavItemTap('/home')">
+                    <Label col="0" text="&#xf015;" class="fa"></Label>
+                    <Label col="1" text="Home" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout row="1" columns="auto, *" class="sidedrawer-list-item"
+                    [class.selected]="isComponentSelected('/menu')" [nsRouterLink]="['/menu']">
+                    <Label col="0" text="&#xf06c;" class="fa"></Label>
+                    <Label col="1" text="Khat" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout row="2" columns="auto, *" class="sidedrawer-list-item"
+                    [class.selected]="isComponentSelected('/search')" (tap)="goToday()">
+                    <Label col="0" text="&#xf002;" class="fa"></Label>
+                    <Label col="1" text="Argent" class="p-r-10"></Label>
+                </GridLayout>
+                <GridLayout row="3" columns="auto, *" class="sidedrawer-list-item"
+                    [class.selected]="isComponentSelected('/settings')" (tap)="goSettings()">
+                    <Label col="0" text="&#xf013;" class="fa"></Label>
+                    <Label col="1" text="Configurations" class="p-r-10"></Label>
+                </GridLayout>
+                <GridLayout row="4" class="hr-light"></GridLayout>
+
+                <GridLayout row="5" columns="auto, *" class="sidedrawer-list-item"
+                    [class.selected]="isComponentSelected('/signIn')" (tap)="onNavItemTap('/signIn')"
+                    [visibility]="!userConnected ? 'visible' : 'collapsed'">
+                    <Label col="0" text="&#xf005;" class="fa"></Label>
+                    <Label col="1" text="Se connecter" class="p-r-10"></Label>
+                </GridLayout>
+                <GridLayout row="5" columns="auto, *" class="sidedrawer-list-item"
+                    [class.selected]="isComponentSelected('/signIn')" (tap)="signOut()"
+                    [visibility]="userConnected ? 'visible' : 'collapsed'">
+                    <Label col="0" text="&#xf005;" class="fa"></Label>
+                    <Label col="1" text="Se deconnecter" class="p-r-10"></Label>
+                </GridLayout>
+            </GridLayout>
+        </ScrollView>
+    </GridLayout>
+
+    <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
+</RadSideDrawer>

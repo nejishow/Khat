@@ -1,0 +1,82 @@
+<Page class="page" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
+    <ActionBar class="action-bar">
+        <!-- 
+                    Use the NavigationButton as a side-drawer button in Android
+                    because ActionItems are shown on the right side of the ActionBar
+                    -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()">
+        </NavigationButton>
+        <!-- 
+                    Use the ActionItem for IOS with position set to left. Using the
+                    NavigationButton as a side-drawer button in iOS is not possible,
+                    because its function is to always navigate back in the application.
+                    -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Menu"></Label>
+    </ActionBar>
+    <GridLayout rows="*, auto, auto">
+        <ScrollView row="0" scrollBarIndicatorVisible="false" paddingBottom="100">
+            <GridLayout rows="*, *, *">
+
+                <!-- header -->
+
+                <GridLayout row="0" rows="*,*" columns="*">
+                    <Label row="0" text="TÊTE" class="subtitle" padding="15"></Label>
+                    <ScrollView row="1" orientation="horizontal" scrollBarIndicatorVisible="false">
+                        <GridLayout rows="*" columns="*,*,*,*">
+                            <GridLayout rows="*,*" columns="*" col="0" class="genre-tiles g1"
+                                [nsRouterLink]="['/submenu'] " [queryParams]="{id:'1'}">
+                                <Image row="0" col="0" src="res://brain" width="300"></Image>
+                                <Label row="1" col="0" text="CERVEAU" horizontalAlignment="center" class="text"
+                                    verticalAlignment="center"></Label>
+                            </GridLayout>
+
+                            <GridLayout col="2" rows="*,*" columns="*" class="genre-tiles g3"
+                                [nsRouterLink]="['/submenu'] " [queryParams]="{id:'3'}">
+                                <Image row="0" col="0" src="res://mouth" width="300"></Image>
+                                <Label row="1" col="0" text="BOUCHE" horizontalAlignment="center" class="text"
+                                    verticalAlignment="center"></Label>
+                            </GridLayout>
+
+                        </GridLayout>
+                    </ScrollView>
+                </GridLayout>
+                <GridLayout row="1" rows="*,*" columns="*">
+                    <Label row="0" text="TRONC" class="subtitle" padding="15"></Label>
+                    <ScrollView row="1" orientation="horizontal" scrollBarIndicatorVisible="false">
+                        <GridLayout rows="*" columns="*,*,*,*">
+                            <GridLayout col="0" rows="*,*" columns="*" class="genre-tiles g1"
+                                [nsRouterLink]="['/submenu'] " [queryParams]="{id:'7'}">
+                                <Image row="0" col="0" src="res://lung" width="300"></Image>
+                                <Label row="1" col="0" text="POUMON" horizontalAlignment="center" class="text"
+                                    verticalAlignment="center"></Label>
+                            </GridLayout>
+                            <GridLayout col="1" rows="*,*" columns="*" class="genre-tiles"
+                                [nsRouterLink]="['/submenu'] " [queryParams]="{id:'6'}">
+                                <Image row="0" col="0" src="res://heart" width="300"></Image>
+                                <Label row="1" col="0" text="COEUR" horizontalAlignment="center" class="text"
+                                    verticalAlignment="center"></Label>
+                            </GridLayout>
+                            <GridLayout col="2" rows="*,*" columns="*" class="genre-tiles g3"
+                                [nsRouterLink]="['/submenu'] " [queryParams]="{id:'5'}">
+                                <Image row="0" col="0" src="res://stomach" width="300"></Image>
+                                <Label row="1" col="0" text="ESTOMAC" horizontalAlignment="center" class="text"
+                                    verticalAlignment="center"></Label>
+                            </GridLayout>
+                            <GridLayout col="3" rows="*,*" columns="*" class="genre-tiles g3"
+                                [nsRouterLink]="['/submenu'] " [queryParams]="{id:'8'}">
+                                <Image row="0" col="0" src="res://liver" width="300"></Image>
+                                <Label row="1" col="0" text="FOIE" horizontalAlignment="center" class="text"
+                                    verticalAlignment="center"></Label>
+                            </GridLayout>
+
+                        </GridLayout>
+                    </ScrollView>
+                </GridLayout>
+
+            </GridLayout>
+        </ScrollView>
+    </GridLayout>
+</Page>

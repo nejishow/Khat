@@ -1,0 +1,43 @@
+<ActionBar class="action-bar">
+    <!--
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!--
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Conclusion"></Label>
+</ActionBar>
+<page id="page">
+    <ScrollView>
+        <StackLayout>
+            <FlexBoxLayout class="header">
+                <Image (tap)="back()" src="res://left" class="bback"></Image>
+            </FlexBoxLayout>
+            <FlexBoxLayout class="btn">
+
+                <Button class="btn btn-primary btn-rounded-lg" text="Experimentation"
+                    [nsRouterLink]="['/experiment']"></Button>
+                <Button class="btn btn-primary btn-rounded-lg" text="Conclusion"
+                    [nsRouterLink]="['/conclusion']"></Button>
+            </FlexBoxLayout>
+            <CardView elevation="40" radius="10" ios:shadowRadius="3">
+                <GridLayout class="card" rows="auto,*,*,*,*" columns="*">
+                    <Label row=0 class="h2" [text]="content[0].title"></Label>
+                    <Label row=1 class="body" textWrap="true" [text]="content[0].conclusion"></Label>
+                    <GridLayout row=2 class="hr-light"></GridLayout>
+                    <Label row=3 class="body" textWrap="true" text="Reference:"></Label>
+                    <Label row=4 class="body" textWrap="true" [text]="content[0].reference"></Label>
+
+                </GridLayout>
+            </CardView>
+
+        </StackLayout>
+    </ScrollView>
+</page>

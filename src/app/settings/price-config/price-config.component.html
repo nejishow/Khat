@@ -1,0 +1,47 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Consommation"></Label>
+</ActionBar>
+<ScrollView>
+
+    <GridLayout columns="*" rows="auto,*,auto,auto" style="height:100%; backgroundColor:'#2C3251'">
+        <label row='0' textWrap="true"
+            text="Veuillez choisisr les produits que vous consommez et leurs prix respectifs." class="consign"></label>
+
+        <ListView style="heigth:auto" row='1' #listView [items]="items" backgroundColor="#2C3251"
+            separatorColor="transparent">
+            <ng-template let-item="item">
+                <CardView elevation="40" radius="10" ios:shadowRadius="3" margin="10">
+                    <GridLayout columns="*,*,*" rows="*,*" class="list-group-item">
+                        <label row='0' col=0 [text]="item.name"> </label>
+                        <Image row='0' col=1 [src]="item.image" height="50"></Image>
+                        <Switch row='0' [checked]="item.consummed" (checkedChange)="check($event,item)" col=2></Switch>
+                        <TextField row='1' col=1 hint="prix" secure="false" [text]="item.price" keyboardType="number"
+                            returnKeyType="done" maxLength="5" class="input input-border"
+                            (textChange)="price($event,item)" [visibility]="item.consummed ? 'visible' : 'collapsed'"></TextField>
+                        <label row='1' col=2 text="FDJ" [visibility]="item.consummed ? 'visible' : 'collapsed'"></label>
+
+                    </GridLayout>
+                </CardView>
+            </ng-template>
+        </ListView>
+      
+        <label row='2' [visibility]="configSaved ? 'visible' : 'collapsed'" text="Prix sauvegardés!" class="consign"></label>
+        <button row='3' text="Confirmer" class="button" (tap)="validate()"></button>
+
+    </GridLayout>
+
+
+</ScrollView>

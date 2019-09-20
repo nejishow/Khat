@@ -1,0 +1,99 @@
+<!--
+    About:
+    App Created for Nativescript Uplabs competition.
+    Using Nativescript Vue, and Pro UI (Charts, Listview & Calendar)
+    The app uses static data, the focus was on building the UI and interactions,
+    and not on the server side integration, more of Form than Function.
+    Awesome learning experience, especially with the layouts and charts integration.
+    It's quiet easy to pickup with what you already know HTML, CSS and JS. I am happy with
+    the results a good one for approx 12 hours of coding.
+    Thanks to Team Nativescript for the awesome work, YOU GUYS ROCK! and the COMMUNITY for all the help.
+    And thanks you guys/gals for reviewing my subsmission.
+    Thanks UPLABS for the oppurtunity!
+    Date:
+    25 Nov 2018.
+    Developer:
+    Jamal Mohammed (jamal@icelabs.in)
+    twitter @mdjamal
+    App UI:
+    Finance calendar and stats
+    by Alex Sol (Big thanks to Alex for making this Free for Personal use)
+    https://www.uplabs.com/posts/finance-calendar-and-stats
+    https://www.uplabs.com/posts/finances-interface
+    Font:
+    Quicksand (Bold, Regular) from nativescript vue interactive weather app tutorial
+    https://www.dafont.com/quicksand.font
+-->
+
+
+<Page class="page" actionBarHidden="true">
+    <!-- <ActionBar title="Home" class="action-bar" > -->
+
+    <DockLayout stretchLastChild="true">
+        <!-- Summary -->
+        <StackLayout orientation="vertical" dock="top">
+            <!-- Navigaton -->
+            <ios>
+                <GridLayout row="0" rows="auto" columns="*,75,*,75" class="action-bar p-20">
+                    <Image src="res://menu" (tap)="onDrawerButtonTap()" row="0" col="0" stretch="aspectFit" width="35"
+                        horizontalAlignment="left" class="action-item p-5"> </Image>
+
+                    <Image src="res://dol" class="action-item p-5" row="0" col="1" stretch="aspectFit" width="35"
+                        horizontalAlignment="center" opacity="0.2"></Image>
+                    <Image src="res://cal" class="action-item p-5" row="0" col="2" stretch="aspectFit" width="35"
+                        horizontalAlignment="center" opacity="0.2"></Image>
+
+                </GridLayout>
+            </ios>
+            <android>
+                <GridLayout row="0" rows="auto" columns="*,75,*,75" class="action-bar p-20">
+                    <Image src="res://menu" (tap)="onDrawerButtonTap()" row="0" col="0" stretch="aspectFit" width="35"
+                        horizontalAlignment="left" class="action-item p-5"> </Image>
+
+                    <Image src="res://dol" class="action-item p-5" row="0" col="1" stretch="aspectFit" width="35"
+                        horizontalAlignment="center" (tap)="goToTodayPage()" opacity="0.5"></Image>
+                    <Image src="res://cal" class="action-item p-5" row="0" col="2" stretch="aspectFit" width="35"
+                        horizontalAlignment="center"></Image>
+
+                </GridLayout>
+            </android>
+            <!-- /Navigation -->
+
+            <RadCalendar (dateSelected)="onDateSelected($event)" height="300" row="0"></RadCalendar>
+
+            <!-- <RadCalendar height="300" > -->
+        </StackLayout>
+        <!-- /Summary -->
+
+        <!-- Footer -->
+
+        <!-- /Footer -->
+
+        <!-- Transactions -->
+        <StackLayout row="2" [visibility]="consumption.length > 0 ? 'visible' : 'collapsed'" orientation="vertical" class="m-t-30"
+            backgroundColor="#2C3251">
+
+            <ListView #listView style="height:1250px" [items]="consumption" backgroundColor="#2C3251"
+                separatorColor="transparent">
+                <ng-template let-item="item">
+                    <CardView elevation="40" radius="10" ios:shadowRadius="3" margin="10">
+
+                        <GridLayout columns="100, *" rows="auto, auto, auto" class="p-l-20" backgroundColor="#FFFFFF">
+                            <Label textWrap="true" [text]="item.price" row="0" col="0" class="h1"
+                                color="#89D5E2"></Label>
+                            <Label textWrap="true" [text]="item.name" row="0" col="1" class="h2 p-r-20"></Label>
+                        </GridLayout>
+                    </CardView>
+                </ng-template>
+            </ListView>
+        </StackLayout>
+        <StackLayout row="2" [visibility]="consumption.length === 0 ? 'visible' : 'collapsed'" orientation="vertical" class="m-t-30"
+            backgroundColor="#2C3251">
+            <label text="Pas de consommation aujourd'hui"></label>
+        </StackLayout>
+        <!-- /Transactions -->
+
+
+
+    </DockLayout>
+</Page>

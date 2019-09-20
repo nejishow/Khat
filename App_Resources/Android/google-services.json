@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "422830061764",
+    "firebase_url": "https://khatinfinity2020.firebaseio.com",
+    "project_id": "khatinfinity2020",
+    "storage_bucket": "khatinfinity2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422830061764:android:8bcde3e2f5065c3d",
+        "android_client_info": {
+          "package_name": "org.nativescript.khat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422830061764-umi9ij6h4h7eeeeg6ocor1gppm044o2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOSVWEbD9OZI9admrXOrNI7FLhTz9Cgw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422830061764-umi9ij6h4h7eeeeg6ocor1gppm044o2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "422830061764-7lv59pkupab7esjo4se2a8n90hjomsl2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.nativescript.khat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

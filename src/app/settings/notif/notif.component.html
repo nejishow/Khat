@@ -1,0 +1,39 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:datetime="nativescript-datetimepicker">
+    <ActionBar class="action-bar">
+        <!-- 
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <!-- 
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Notification"></Label>
+    </ActionBar>
+    <GridLayout rows="*,*,*,*,*,*,*" columns="*" class="notif">
+        <label row='0' textWrap="true" text="Veuillez inserer le nombre d'heure de Khat par séance"></label>
+        <GridLayout row='1' rows=auto columns="*,*">
+            <TextField col=0 [(ngModel)]="hours" row='0' keyboardType="number">
+            </TextField>
+            <label row='0' col=1 text="heures"></label>
+        </GridLayout>
+        <label row='2' textWrap="true"
+            text="Veuillez choisir l'heure que vous broutez en general, vous recevrez une petite notification chaque jour pour confirmer."></label>
+        <label row='3' textWrap="true" text="Aucune notification enregistrée" [visibility]="!time ? 'visible' : 'collapsed'" ></label>
+        <GridLayout row="3" rows="*" columns="*,*,*" [visibility]="time ? 'visible' : 'collapsed'" >
+            <label col='0' colSpan="2" textWrap="true" text="Notification enregistrée pour: "></label>
+            <label col='3' textWrap="true" [text]="time"></label>
+
+        </GridLayout>
+
+        <TimePicker row='4' rowSpan="2" (loaded)="onPickerLoaded($event)" (timeChange)="onTimeChanged($event)"
+            verticalAlignment="center" class="m-15"></TimePicker>
+        <label [visibility]="configSaved ? 'visible' : 'collapsed'" text="Heure de notification sauvegardée!"></label>
+        <Button row='6' text="Confirmer" (tap)="scheduleNotif()" class="button"></Button>
+    </GridLayout>
+</Page>

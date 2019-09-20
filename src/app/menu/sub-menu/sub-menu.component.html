@@ -1,0 +1,38 @@
+<page>
+
+    <ActionBar class="action-bar">
+        <!--
+                    Use the NavigationButton as a side-drawer button in Android
+                    because ActionItems are shown on the right side of the ActionBar
+                    -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <!--
+                    Use the ActionItem for IOS with position set to left. Using the
+                    NavigationButton as a side-drawer button in iOS is not possible,
+                    because its function is to always navigate back in the application.
+                    -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" [text]="section"></Label>
+    </ActionBar>
+    <GridLayout rows="50,*">
+
+        <FlexBoxLayout row=0 class="header">
+            <Image (tap)="back()" src="res://left" class="bback"></Image>
+        </FlexBoxLayout>
+        <ListView row=1 class="list-group" [items]="content" (itemTap)="onItemTap($event)" style="height:100%"
+            orientation="horizontal">
+            <ng-template let-content="item">
+                <CardView elevation="40" radius="10" ios:shadowRadius="3" margin="10">
+                    <GridLayout rows="*" columns="*,*">
+                        <Image col="0" [src]="content.image " class="profile__photo"></Image>
+                        <Label col="1" [text]=" content.title" class="news-source"></Label>
+                    </GridLayout>
+                </CardView>
+            </ng-template>
+        </ListView>
+
+
+    </GridLayout>
+</page>

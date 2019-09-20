@@ -1,0 +1,39 @@
+<Page class="page" loaded="loaded" unloaded="unloaded" navigatedTo="onNavigatedTo"
+    xmlns="http://schemas.nativescript.org/tns.xsd" actionBarHidden="true">
+
+    <ActionBar class="action-bar">
+        <!-- 
+                        Use the NavigationButton as a side-drawer button in Android
+                        because ActionItems are shown on the right side of the ActionBar
+                        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()">
+        </NavigationButton>
+        <!-- 
+                        Use the ActionItem for IOS with position set to left. Using the
+                        NavigationButton as a side-drawer button in iOS is not possible,
+                        because its function is to always navigate back in the application.
+                        -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Connection"></Label>
+    </ActionBar>
+<FlexboxLayout class="flex">
+        <StackLayout class="form">
+            <TextField hint="Nom d'utilisateur ou addresse" [visibility]="isLoggingIn ? 'visible' : 'collapsed'" keyboardType="email" autocorrect="false" autocapitalizationType="none" [(ngModel)]="user.username"
+            class="input input-border"></TextField>
+            <TextField hint="Nom d'utilisateur" [visibility]="!isLoggingIn ? 'visible' : 'collapsed'" keyboardType="email" autocorrect="false" autocapitalizationType="none" [(ngModel)]="user.username"
+            class="input input-border"></TextField>
+          <TextField hint="Addresse email" [visibility]="!isLoggingIn ? 'visible' : 'collapsed'" keyboardType="email" autocorrect="false" autocapitalizationType="none" [(ngModel)]="user.email"
+            class="input input-border"></TextField>
+          <TextField hint="Mot de passe" [(ngModel)]="user.password" secure="true" class="input input-border"></TextField>
+          <TextField hint="Confirmer Mot de passe" [visibility]="!isLoggingIn ? 'visible' : 'collapsed'" [(ngModel)]="password" secure="true" class="input input-border"></TextField>
+          <TextField hint="Votre age" [visibility]="!isLoggingIn ? 'visible' : 'collapsed'" [(ngModel)]="age" keyboardType="number" secure="false" class="input input-border"></TextField>
+
+          <Button [text]="isLoggingIn ? 'S\'identifier' : 'S\'enregistrer'"
+          class="btn" (tap)="submit()"></Button>
+        <Button [text]="isLoggingIn ? 'S\'enregistrer' : 'S\'identifier'"
+          (tap)="toggleDisplay()"></Button>
+        </StackLayout>
+      </FlexboxLayout>
+    </Page>
