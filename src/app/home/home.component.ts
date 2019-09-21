@@ -6,6 +6,7 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { MoneyService } from "../services/money.service";
 import * as firebase from "nativescript-plugin-firebase";
+import { isEmpty } from 'rxjs/operators';
 
 @Component({
     selector: "Home",
@@ -16,7 +17,7 @@ import * as firebase from "nativescript-plugin-firebase";
 export class HomeComponent implements OnInit {
     db;
     userdata;
-    isConnected;
+    isConnected = false;
     constructor(private money: MoneyService, private router: Router, private CB: Couchebase, private fireS: FirebaseService) {
         // Use the component constructor to inject providers.
         firebase.getCurrentUser().then(
@@ -31,22 +32,29 @@ export class HomeComponent implements OnInit {
             //    order: [{ property: 'firstName', direction: 'desc' }],
             //    limit: 2
         });
+
         let items = [];
         if (this.isConnected) {
             await items == this.money.items;
             if (consumption.length !== 0) {
+                console.log("ca existait");
+
                 this.router.navigate(["/today"]);
 
-            } else if (items.length !== 0 && consumption.length === 0) {
+            }
+            if (this.money.items.length > 0 && consumption.length === 0) {
+
                 const documentId = this.CB.database.createDocument(
                     {
                         "idConcumption": 1,
                         "consumption": true
                     }
                 );
-                this.CB.database.updateDocument(documentId, {
+                await this.CB.database.updateDocument(documentId, {
                     "documentId": documentId
                 });
+                this.router.navigate(["/today"]);
+
             }
             else {
                 console.log("configuration first");

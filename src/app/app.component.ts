@@ -32,7 +32,10 @@ export class AppComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     constructor(private router: Router, private routerExtensions: RouterExtensions, private auth: UserLogService, private money: MoneyService, private notifS: NotificationService, private fireS: FirebaseService, private CB: Couchebase) {
         //
-        firebase.getCurrentUser().then((User) => this.user = User);
+        firebase.getCurrentUser().then((User) => {
+        this.user = User;
+            this.userConnected = true
+        });
 
         startMonitoring(async (newConnectionType) => {
             switch (newConnectionType) {
