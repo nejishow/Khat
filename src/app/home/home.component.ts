@@ -41,8 +41,7 @@ export class HomeComponent implements OnInit {
 
                 this.router.navigate(["/today"]);
 
-            }
-            if (this.money.items.length > 0 && consumption.length === 0) {
+            } else if (this.money.items.length > 0 && consumption.length === 0) {
 
                 const documentId = this.CB.database.createDocument(
                     {
@@ -61,9 +60,7 @@ export class HomeComponent implements OnInit {
 
             }
         } else {
-            setTimeout(() => {
-                console.log("connect first");
-            }, 100);
+            console.log("connect first");
 
         }
 
