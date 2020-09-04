@@ -47,7 +47,7 @@
     "codelyzer": "~4.5.0",
     "nativescript-dev-webpack": "1.0.1",
     "tslint": "~5.11.0",
-    "node-sass": "4.12.0",
+    "node-sass": "4.13.1",
     "typescript": "3.4.5"
   },
   "gitHead": "67e1a5d2fe6907c5e775d020e6439df795154f58",
